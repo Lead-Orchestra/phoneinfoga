@@ -22,70 +22,70 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
-import axios from "axios";
-import { mapMutations } from "vuex";
-import config from "@/config";
-import { ScanResponse } from "@/views/Scan.vue";
+import { Component, Vue, Prop } from 'vue-property-decorator';
+import axios from 'axios';
+import { mapMutations } from 'vuex';
+import config from '@/config';
+import { ScanResponse } from '@/views/Scan.vue';
 
 interface NumverifyScanResponse {
-  valid: boolean;
-  number: string;
-  localFormat: string;
-  internationalFormat: string;
-  countryPrefix: string;
-  countryCode: string;
-  countryName: string;
-  location: string;
-  carrier: string;
-  lineType: string;
+	valid: boolean;
+	number: string;
+	localFormat: string;
+	internationalFormat: string;
+	countryPrefix: string;
+	countryCode: string;
+	countryName: string;
+	location: string;
+	carrier: string;
+	lineType: string;
 }
 
 @Component
 export default class GoogleSearch extends Vue {
-  id = "numverify";
-  name = "Numverify scan";
-  data: NumverifyScanResponse[] = [];
-  loading = false;
-  computed = {
-    ...mapMutations(["pushError"]),
-  };
+	id = 'numverify';
+	name = 'Numverify scan';
+	data: NumverifyScanResponse[] = [];
+	loading = false;
+	computed = {
+		...mapMutations(['pushError']),
+	};
 
-  @Prop() scan!: Vue;
+	@Prop() scan!: Vue;
 
-  mounted(): void {
-    this.scan.$on("scan", async () => {
-      this.loading = true;
+	mounted(): void {
+		this.scan.$on('scan', async () => {
+			this.loading = true;
 
-      try {
-        await this.run();
-      } catch (e) {
-        this.$store.commit("pushError", { message: `${this.name}: ${e}` });
-      }
+			try {
+				await this.run();
+			} catch (e) {
+				this.$store.commit('pushError', { message: `${this.name}: ${e}` });
+			}
 
-      this.loading = false;
-      this.scan.$emit("finished");
-    });
-    this.scan.$on("clear", this.clear);
-  }
+			this.loading = false;
+			this.scan.$emit('finished');
+		});
+		this.scan.$on('clear', this.clear);
+	}
 
-  private clear() {
-    this.data = [];
-  }
+	private clear() {
+		this.data = [];
+	}
 
-  private async run(): Promise<void> {
-    const res: ScanResponse<NumverifyScanResponse> = await axios.get(
-      `${config.apiUrl}/numbers/${this.$store.state.number}/scan/${this.id}`,
-      {
-        validateStatus: () => true,
-      }
-    );
+	private async run(): Promise<void> {
+		const res: ScanResponse<NumverifyScanResponse> = await axios.get(
+			`${config.apiUrl}/numbers/${this.$store.state.number}/scan/${this.id}`,
+			{
+				validateStatus: () => true,
+			}
+		);
 
-    if (!res.data.success && res.data.error) {
-      throw res.data.error;
-    }
+		if (!res.data.success && res.data.error) {
+			throw res.data.error;
+		}
 
-    this.data.push(res.data.result);
-  }
+		this.data.push(res.data.result);
+	}
 }
 </script>

@@ -139,89 +139,89 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
-import axios from "axios";
-import { mapMutations } from "vuex";
-import config from "@/config";
-import { ScanResponse } from "@/views/Scan.vue";
+import { Component, Vue, Prop } from 'vue-property-decorator';
+import axios from 'axios';
+import { mapMutations } from 'vuex';
+import config from '@/config';
+import { ScanResponse } from '@/views/Scan.vue';
 
 interface GoogleSearchScanResponse {
-  social_media: GoogleSearchDork[];
-  disposable_providers: GoogleSearchDork[];
-  reputation: GoogleSearchDork[];
-  individuals: GoogleSearchDork[];
-  general: GoogleSearchDork[];
+	social_media: GoogleSearchDork[];
+	disposable_providers: GoogleSearchDork[];
+	reputation: GoogleSearchDork[];
+	individuals: GoogleSearchDork[];
+	general: GoogleSearchDork[];
 }
 
 interface GoogleSearchDork {
-  number: string;
-  dork: string;
-  url: string;
+	number: string;
+	dork: string;
+	url: string;
 }
 
 @Component
 export default class GoogleSearch extends Vue {
-  id = "googlesearch";
-  name = "Google search";
-  data: GoogleSearchScanResponse = {
-    social_media: [],
-    disposable_providers: [],
-    reputation: [],
-    individuals: [],
-    general: [],
-  };
-  loading = false;
-  computed = {
-    ...mapMutations(["pushError"]),
-  };
+	id = 'googlesearch';
+	name = 'Google search';
+	data: GoogleSearchScanResponse = {
+		social_media: [],
+		disposable_providers: [],
+		reputation: [],
+		individuals: [],
+		general: [],
+	};
+	loading = false;
+	computed = {
+		...mapMutations(['pushError']),
+	};
 
-  @Prop() scan!: Vue;
+	@Prop() scan!: Vue;
 
-  mounted(): void {
-    this.scan.$on("scan", async () => {
-      this.loading = true;
+	mounted(): void {
+		this.scan.$on('scan', async () => {
+			this.loading = true;
 
-      try {
-        await this.run();
-      } catch (e) {
-        this.$store.commit("pushError", { message: `${this.name}: ${e}` });
-      }
+			try {
+				await this.run();
+			} catch (e) {
+				this.$store.commit('pushError', { message: `${this.name}: ${e}` });
+			}
 
-      this.loading = false;
-      this.scan.$emit("finished");
-    });
-    this.scan.$on("clear", this.clear);
-  }
+			this.loading = false;
+			this.scan.$emit('finished');
+		});
+		this.scan.$on('clear', this.clear);
+	}
 
-  private clear() {
-    this.data = {
-      social_media: [],
-      disposable_providers: [],
-      reputation: [],
-      individuals: [],
-      general: [],
-    };
-  }
+	private clear() {
+		this.data = {
+			social_media: [],
+			disposable_providers: [],
+			reputation: [],
+			individuals: [],
+			general: [],
+		};
+	}
 
-  private async run(): Promise<void> {
-    const res: ScanResponse<GoogleSearchScanResponse> = await axios.get(
-      `${config.apiUrl}/numbers/${this.$store.state.number}/scan/${this.id}`,
-      {
-        validateStatus: () => true,
-      }
-    );
+	private async run(): Promise<void> {
+		const res: ScanResponse<GoogleSearchScanResponse> = await axios.get(
+			`${config.apiUrl}/numbers/${this.$store.state.number}/scan/${this.id}`,
+			{
+				validateStatus: () => true,
+			}
+		);
 
-    if (!res.data.success && res.data.error) {
-      throw res.data.error;
-    }
+		if (!res.data.success && res.data.error) {
+			throw res.data.error;
+		}
 
-    this.data = res.data.result;
-  }
+		this.data = res.data.result;
+	}
 
-  openLinks(dork: GoogleSearchDork[]): void {
-    for (const result of dork) {
-      window.open(result.url, "_blank");
-    }
-  }
+	openLinks(dork: GoogleSearchDork[]): void {
+		for (const result of dork) {
+			window.open(result.url, '_blank');
+		}
+	}
 }
 </script>

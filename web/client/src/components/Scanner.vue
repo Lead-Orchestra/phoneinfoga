@@ -28,81 +28,81 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
-import axios from "axios";
-import { mapState, mapMutations } from "vuex";
-import JsonViewer from "vue-json-viewer";
-import config from "@/config";
+import { Component, Vue, Prop } from 'vue-property-decorator';
+import axios from 'axios';
+import { mapState, mapMutations } from 'vuex';
+import JsonViewer from 'vue-json-viewer';
+import config from '@/config';
 
 @Component({
-  components: {
-    JsonViewer,
-  },
+	components: {
+		JsonViewer,
+	},
 })
 export default class Scanner extends Vue {
-  data = null;
-  loading = false;
-  dryrunError = false;
-  error: unknown = null;
-  computed = {
-    ...mapState(["number"]),
-    ...mapMutations(["pushError"]),
-  };
+	data = null;
+	loading = false;
+	dryrunError = false;
+	error: unknown = null;
+	computed = {
+		...mapState(['number']),
+		...mapMutations(['pushError']),
+	};
 
-  @Prop() scanId!: string;
-  @Prop() name!: string;
+	@Prop() scanId!: string;
+	@Prop() name!: string;
 
-  collapseId = "scanner-collapse" + this.scanId;
+	collapseId = 'scanner-collapse' + this.scanId;
 
-  mounted(): void {
-    this.dryRun();
-  }
+	mounted(): void {
+		this.dryRun();
+	}
 
-  private async dryRun(): Promise<void> {
-    try {
-      const res = await axios.post(
-        `${config.apiUrl}/v2/scanners/${this.scanId}/dryrun`,
-        {
-          number: this.$store.state.number,
-        },
-        {
-          validateStatus: () => true,
-        }
-      );
+	private async dryRun(): Promise<void> {
+		try {
+			const res = await axios.post(
+				`${config.apiUrl}/v2/scanners/${this.scanId}/dryrun`,
+				{
+					number: this.$store.state.number,
+				},
+				{
+					validateStatus: () => true,
+				}
+			);
 
-      if (!res.data.success && res.data.error) {
-        throw res.data.error;
-      }
-    } catch (error: unknown) {
-      this.dryrunError = true;
-      this.error = error;
-    }
-  }
+			if (!res.data.success && res.data.error) {
+				throw res.data.error;
+			}
+		} catch (error: unknown) {
+			this.dryrunError = true;
+			this.error = error;
+		}
+	}
 
-  private async runScan(): Promise<void> {
-    this.error = null;
-    this.loading = true;
-    try {
-      const res = await axios.post(
-        `${config.apiUrl}/v2/scanners/${this.scanId}/run`,
-        {
-          number: this.$store.state.number,
-        },
-        {
-          validateStatus: () => true,
-        }
-      );
+	private async runScan(): Promise<void> {
+		this.error = null;
+		this.loading = true;
+		try {
+			const res = await axios.post(
+				`${config.apiUrl}/v2/scanners/${this.scanId}/run`,
+				{
+					number: this.$store.state.number,
+				},
+				{
+					validateStatus: () => true,
+				}
+			);
 
-      if (!res.data.success && res.data.error) {
-        throw res.data.error;
-      }
-      this.data = res.data.result;
-      this.$root.$emit("bv::toggle::collapse", this.collapseId);
-    } catch (error) {
-      this.error = error;
-    }
+			if (!res.data.success && res.data.error) {
+				throw res.data.error;
+			}
+			this.data = res.data.result;
+			this.$root.$emit('bv::toggle::collapse', this.collapseId);
+		} catch (error) {
+			this.error = error;
+		}
 
-    this.loading = false;
-  }
+		this.loading = false;
+	}
 }
 </script>
