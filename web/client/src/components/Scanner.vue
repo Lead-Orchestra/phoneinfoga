@@ -28,10 +28,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
 import axios from 'axios';
-import { mapState, mapMutations } from 'vuex';
 import JsonViewer from 'vue-json-viewer';
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import { mapMutations, mapState } from 'vuex';
 import config from '@/config';
 
 @Component({

@@ -29,12 +29,12 @@
 </template>
 
 <script lang="ts">
+import axios, { type AxiosResponse } from 'axios';
 import Vue from 'vue';
 import { mapMutations, mapState } from 'vuex';
-import { formatNumber, isValid, formatString, getScanners } from '../utils';
-import Scanner from '../components/Scanner.vue';
-import axios, { AxiosResponse } from 'axios';
 import config from '@/config';
+import Scanner from '../components/Scanner.vue';
+import { formatNumber, formatString, getScanners, isValid } from '../utils';
 
 interface ScannerObject {
 	name: string;

@@ -22,11 +22,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
 import axios from 'axios';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import { mapMutations } from 'vuex';
 import config from '@/config';
-import { ScanResponse } from '@/views/Scan.vue';
+import type { ScanResponse } from '@/views/Scan.vue';
 
 interface NumverifyScanResponse {
 	valid: boolean;

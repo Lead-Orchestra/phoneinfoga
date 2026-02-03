@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '../config/index';
+
 interface ScannerObject {
 	name: string;
 	description: string;

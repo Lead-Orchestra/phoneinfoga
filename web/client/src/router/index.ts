@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Scan from '../views/Scan.vue';
-import Number from '../views/Number.vue';
 import NotFound from '../views/NotFound.vue';
+import Number from '../views/Number.vue';
+import Scan from '../views/Scan.vue';
 
 Vue.use(VueRouter);
 

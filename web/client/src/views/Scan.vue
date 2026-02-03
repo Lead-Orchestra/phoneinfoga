@@ -60,13 +60,13 @@
 </template>
 
 <script lang="ts">
+import axios, { type AxiosResponse } from 'axios';
 import Vue from 'vue';
-import { mapMutations, mapState } from 'vuex';
-import { formatNumber, isValid, formatString, getScanners } from '../utils';
 import VuePhoneNumberInput from 'vue-phone-number-input';
-import Scanner from '../components/Scanner.vue';
-import axios, { AxiosResponse } from 'axios';
+import { mapMutations, mapState } from 'vuex';
 import config from '@/config';
+import Scanner from '../components/Scanner.vue';
+import { formatNumber, formatString, getScanners, isValid } from '../utils';
 
 interface InputNumberObject {
 	countryCallingCode: string;
