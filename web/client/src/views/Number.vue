@@ -29,10 +29,10 @@
 </template>
 
 <script lang="ts">
+import config from '@/config';
 import axios, { type AxiosResponse } from 'axios';
 import Vue from 'vue';
 import { mapMutations, mapState } from 'vuex';
-import config from '@/config';
 import Scanner from '../components/Scanner.vue';
 import { formatNumber, formatString, getScanners, isValid } from '../utils';
 

@@ -60,11 +60,11 @@
 </template>
 
 <script lang="ts">
+import config from '@/config';
 import axios, { type AxiosResponse } from 'axios';
 import Vue from 'vue';
 import VuePhoneNumberInput from 'vue-phone-number-input';
 import { mapMutations, mapState } from 'vuex';
-import config from '@/config';
 import Scanner from '../components/Scanner.vue';
 import { formatNumber, formatString, getScanners, isValid } from '../utils';
 

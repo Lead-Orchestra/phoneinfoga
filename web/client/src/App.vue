@@ -99,10 +99,10 @@
 
 <script lang="ts">
 
+import config from "@/config";
 import axios, { AxiosResponse } from "axios";
 import Vue from "vue";
 import { mapState } from "vuex";
-import config from "@/config";
 
 type HealthResponse = { success: boolean; version: string; demo: boolean };
 

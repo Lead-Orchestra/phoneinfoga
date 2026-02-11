@@ -28,11 +28,11 @@
 </template>
 
 <script lang="ts">
+import config from '@/config';
 import axios from 'axios';
 import JsonViewer from 'vue-json-viewer';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { mapMutations, mapState } from 'vuex';
-import config from '@/config';
 
 @Component({
 	components: {
