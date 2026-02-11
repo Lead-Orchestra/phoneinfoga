@@ -218,7 +218,9 @@
 .b-form-datepicker.form-control > .btn > div {
 	transition: -webkit-transform 0.15s;
 	transition: transform 0.15s;
-	transition: transform 0.15s, -webkit-transform 0.15s;
+	transition:
+		transform 0.15s,
+		-webkit-transform 0.15s;
 }
 .b-form-datepicker.form-control > .btn:disabled {
 	pointer-events: none;
@@ -378,7 +380,9 @@ input[type="color"].form-control:disabled {
 	border: 1px solid #ced4da;
 	height: calc(1.5em + 0.75rem + 2px);
 	border-radius: 0.25rem;
-	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	transition:
+		border-color 0.15s ease-in-out,
+		box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
 	.input-group > .custom-range {
@@ -417,15 +421,21 @@ input[type="color"].form-control:disabled {
 }
 .custom-range.is-valid:focus::-webkit-slider-thumb,
 .was-validated .custom-range:valid:focus::-webkit-slider-thumb {
-	box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem #9be7ac;
+	box-shadow:
+		0 0 0 1px #fff,
+		0 0 0 0.2rem #9be7ac;
 }
 .custom-range.is-valid:focus::-moz-range-thumb,
 .was-validated .custom-range:valid:focus::-moz-range-thumb {
-	box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem #9be7ac;
+	box-shadow:
+		0 0 0 1px #fff,
+		0 0 0 0.2rem #9be7ac;
 }
 .custom-range.is-valid:focus::-ms-thumb,
 .was-validated .custom-range:valid:focus::-ms-thumb {
-	box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem #9be7ac;
+	box-shadow:
+		0 0 0 1px #fff,
+		0 0 0 0.2rem #9be7ac;
 }
 .custom-range.is-valid::-webkit-slider-thumb,
 .was-validated .custom-range:valid::-webkit-slider-thumb {
@@ -490,15 +500,21 @@ input[type="color"].form-control:disabled {
 }
 .custom-range.is-invalid:focus::-webkit-slider-thumb,
 .was-validated .custom-range:invalid:focus::-webkit-slider-thumb {
-	box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem #f6cdd1;
+	box-shadow:
+		0 0 0 1px #fff,
+		0 0 0 0.2rem #f6cdd1;
 }
 .custom-range.is-invalid:focus::-moz-range-thumb,
 .was-validated .custom-range:invalid:focus::-moz-range-thumb {
-	box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem #f6cdd1;
+	box-shadow:
+		0 0 0 1px #fff,
+		0 0 0 0.2rem #f6cdd1;
 }
 .custom-range.is-invalid:focus::-ms-thumb,
 .was-validated .custom-range:invalid:focus::-ms-thumb {
-	box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem #f6cdd1;
+	box-shadow:
+		0 0 0 1px #fff,
+		0 0 0 0.2rem #f6cdd1;
 }
 .custom-range.is-invalid::-webkit-slider-thumb,
 .was-validated .custom-range:invalid::-webkit-slider-thumb {
@@ -1829,7 +1845,9 @@ input[type="color"].form-control:disabled {
 .b-toaster.b-toaster-top-right .b-toast.b-toaster-move {
 	transition: -webkit-transform 175ms;
 	transition: transform 175ms;
-	transition: transform 175ms, -webkit-transform 175ms;
+	transition:
+		transform 175ms,
+		-webkit-transform 175ms;
 }
 .b-toaster.b-toaster-bottom-left .b-toast.b-toaster-enter-active .toast.fade,
 .b-toaster.b-toaster-bottom-left .b-toast.b-toaster-enter-to .toast.fade,
