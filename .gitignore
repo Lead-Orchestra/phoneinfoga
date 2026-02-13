@@ -21,3 +21,8 @@ coverage
 coverage.*
 unit-tests.xml
 .idea
+
+# Local Python artifacts (sometimes created by tooling)
+.venv/
+__pycache__/
+*.pyc
